@@ -69,3 +69,10 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   
   - **Active Learning**
   Active learning is a sub-problem of the Passive learning case where the target set contains only 1 node. Therefore, You can use **PLScore** for this purpose too.
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Future work maybe focused at adding support for other objective functions.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
