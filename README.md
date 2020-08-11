@@ -27,6 +27,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   
   ```python
   from LazyIter.count import LazyCount
+  
   neighbors = {
         0: {1, 3, 6},
         1: {0, 3},
@@ -49,6 +50,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   
   ```python
   from LazyIter.learn import PLScore
+  
   neighbors = {
         0: {1, 3, 6},
         1: {0, 3},
