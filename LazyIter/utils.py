@@ -124,7 +124,8 @@ def find_chain_components(adj_mat, neigbors, is_valid):
     #     print([num+1 for num in list(range(n)) if component_id[num] == id])
 
 
+# Calculate factorial
 
 fact = [1] * 5000
-for i in range(1,5000):
+for i in range(1, 5000):
     fact[i] = fact[i-1] * i
