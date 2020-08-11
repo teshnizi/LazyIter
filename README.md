@@ -48,7 +48,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   You can find the number of directed edges in the worst case for a given set of experiment targets using **PLScore** function. To find the best target, you could simply iterate over all valid target sets (based on the experiment budget) and choose the one with maximum score.
   
   ```python
-  from LazyIter.count import LazyCount
+  from LazyIter.learn import PLScore
   neighbors = {
         0: {1, 3, 6},
         1: {0, 3},
