@@ -1,5 +1,5 @@
 # LazyIter
-Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov Equivalent DAGs and Designing Experiments". You can find the paper [here](https://proceedings.icml.cc/static/paper_files/icml/2020/1030-Paper.pdf) and the PyPi package [here](https://pypi.org/manage/project/lazyiter-teshnizi/releases/).
+Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov Equivalent DAGs and Designing Experiments". You can find the paper [here](https://proceedings.icml.cc/static/paper_files/icml/2020/1030-Paper.pdf) and the PyPi package [here](https://pypi.org/project/LazyIter-teshnizi/).
 
 ## installation
 
