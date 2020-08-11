@@ -1,17 +1,5 @@
 import queue
 
-
-
-
-# def get_all_subsets(st):
-#     ret = []
-#     for i in range(len(st) + 1):
-#         lst = list(itertools.combinations(st, i))
-#         for item in lst:
-#             ret.append(list(item))
-#     return ret
-
-
 def get_accessible_nodes(adj, source, valid_nodes):
     n = adj.shape[0]
     q = queue.Queue(maxsize=n)
@@ -32,8 +20,6 @@ def get_accessible_nodes(adj, source, valid_nodes):
             res.append(i)
 
     return res
-
-
 
 
 def bfs_optimized(neighbors, start):
@@ -60,9 +46,6 @@ def bfs_optimized(neighbors, start):
 
 def set_root(adj_mat, neighbors, root, is_valid):
 
-    # t = ttictoc.TicToc()
-    # t.tic()
-
     added_edges = []
     q = queue.Queue()
 
@@ -72,11 +55,10 @@ def set_root(adj_mat, neighbors, root, is_valid):
             added_edges.append((root, i))
             q.put((root, i))
             adj_mat[i][root] = 0
-    # total_hash_time[4] += t.toc()
+
     """
     If the graph is not chordal, direction of the root's edges might be overwritten in the following while-loop! 
     """
-    # t.tic()
     while not q.empty():
         s, e = q.get()
         for i in neighbors[e]:
@@ -85,49 +67,90 @@ def set_root(adj_mat, neighbors, root, is_valid):
                 q.put((e, i))
                 adj_mat[i][e] = 0
 
-    # total_hash_time[5] += t.toc()
     return added_edges
 
 
 
-
-def encode(lst):
-    w = 1
-    sm = 0
-    for i in lst:
-        if i:
-            sm += w
-        w *= 2
-    return sm
-
-
-
-
-def find_chain_components(adj_mat, neigbors, is_valid):
-    n = len(adj_mat)
-    component_id = [-1] * n
-    current_id = 0
-    for i in range(n):
-        if is_valid[i]:
-            if component_id[i] == -1:
-                q = queue.Queue()
-                q.put(i)
-                while not q.empty():
-                    node = q.get()
-                    component_id[node] = current_id
-                    for v in neigbors[node]:
-                        if component_id[v] == -1 and is_valid[v] and adj_mat[v][node] == 1 and adj_mat[node][v] == 1:
-                            # print(node+1, v+1, component_id[v])
-                            q.put(v)
-                current_id += 1
-
-    return [[num for num in list(range(n)) if component_id[num] == id] for id in range(current_id)]
-    # for id in range(current_id):
-    #     print([num+1 for num in list(range(n)) if component_id[num] == id])
-
-
-# Calculate factorial
-
 fact = [1] * 5000
-for i in range(1, 5000):
+for i in range(1,5000):
     fact[i] = fact[i-1] * i
+
+
+def separate_graph(G):
+    for i in G:
+        for j in G[i].copy():
+            if not i in G[j]:
+                G[i].remove(j)
+    left=set(G.keys())
+    H=[]
+    while len(left)>0:
+        current=left.pop()
+        visited={current}
+        tovisit=G[current].copy()
+        Tg={}
+        Tg[current]=G[current].copy()
+        while len(tovisit)>0:
+            tem=tovisit.pop()
+            visited.add(tem)
+            Tg[tem]=G[tem].copy()
+            tovisit.update(G[tem].difference(visited))
+            left.remove(tem)
+        H.append(Tg)
+    return H
+
+
+def set_root_optimized(root, neighbors):
+    nodes = set(neighbors.keys())
+    directed_edges = []
+
+    if root not in nodes:
+        print("Missing root!")
+
+    current_nodes = {root}
+    CCs = list()
+    left = nodes - current_nodes
+
+    while len(left) != 0:
+        res = set()
+        fathers = {}
+        for i in current_nodes:
+            nodestem = neighbors[i].intersection(left)
+            res |= nodestem
+            for nodesi in nodestem:
+                if nodesi in fathers:
+                    fathers[nodesi].add(i)
+                else:
+                    fathers[nodesi] = {i}
+                directed_edges.append((i, nodesi))
+        residual_graph = {i: neighbors[i]&res for i in res}
+
+        is_done = False
+        while not is_done:
+            is_done = True
+            for i in residual_graph:
+                removed_edges = []
+                for j in residual_graph[i]:
+                    if not fathers[i].issubset(neighbors[j]):
+                        fathers[j].add(i)
+                        removed_edges.append((i, j))
+                        directed_edges.append((i, j))
+                        is_done = False
+                for x, y in removed_edges:
+                    residual_graph[x].remove(y)
+                    residual_graph[y].remove(x)
+
+            residual_graph = {i:residual_graph[i] for i in residual_graph}
+        CCs.extend(separate_graph(residual_graph))
+        if len(res) == 0:
+            break
+        current_nodes = res
+        left -= res
+
+    new_neighbors = {i: set() for i in nodes}
+    for x, y in directed_edges:
+        new_neighbors[x].add(y)
+    for CC in CCs:
+        for i in CC:
+            new_neighbors[i] = new_neighbors[i]|CC[i]
+
+    return [item.keys() for item in CCs], new_neighbors
