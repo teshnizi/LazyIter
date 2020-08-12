@@ -12,7 +12,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
 
 2. **using the codes directly**
   
-   you can also copy files inside **LazyIter** folder to your project's folder and import the functions into your code. 
+  You can also copy files inside **LazyIter** folder to your project's folder and import the functions into your code. 
 
 
 ## Usage
