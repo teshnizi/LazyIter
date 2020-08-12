@@ -11,15 +11,15 @@ def count_iterate_optimized(neighbors, source, dp, parents, hidden_CC, children_
     sum_res = 0
     mult_res = 1
     for ccmp in children_CCs:
-        k = LazyCount({i: ccmp & undirected_graph[i] for i in ccmp}, dp, verbose=verbose)
+        k = lazy_count({i: ccmp & undirected_graph[i] for i in ccmp}, dp, verbose=verbose)
         mult_res *= k
 
     for ccmp in descendants_CCs:
-        k = LazyCount({i: ccmp & undirected_graph[i] for i in ccmp}, dp, verbose=verbose)
+        k = lazy_count({i: ccmp & undirected_graph[i] for i in ccmp}, dp, verbose=verbose)
         mult_res *= k
 
     g_graph = parents.union(hidden_CC)
-    k = LazyCount({i: g_graph & undirected_graph[i] for i in g_graph}, dp, verbose=verbose)
+    k = lazy_count({i: g_graph & undirected_graph[i] for i in g_graph}, dp, verbose=verbose)
     mult_res *= k
 
     sum_res += mult_res
@@ -71,10 +71,10 @@ def count_iterate_optimized(neighbors, source, dp, parents, hidden_CC, children_
 
 
 
-def LazyCount(neighbors, dp={}, verbose=False):
+def lazy_count(neighbors, dp={}, verbose=False):
 
     if verbose:
-        print("Count on: ", neighbors.keys(),"                   ", neighbors)
+        print("Counting DAGs on: ", neighbors.keys())
 
     num_of_edges = sum([len(neighbors[i]) for i in neighbors]) / 2
 

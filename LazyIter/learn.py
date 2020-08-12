@@ -14,17 +14,17 @@ def evaluate_iterate_optimized(neighbors, source, targets, dp, parents, hidden_C
 
     ss = [case_score]
     for ccmp in children_CCs:
-        s = PLScore({i: ccmp & undirected_graph[i] for i in ccmp}, ccmp & targets, dp, verbose=verbose)
+        s = pl_score({i: ccmp & undirected_graph[i] for i in ccmp}, ccmp & targets, dp, verbose=verbose)
         ss.append((s, ccmp))
         case_score += s
 
     for ccmp in descendent_CCs:
-        s = PLScore({i: ccmp & undirected_graph[i] for i in ccmp}, ccmp & targets, dp, verbose=verbose)
+        s = pl_score({i: ccmp & undirected_graph[i] for i in ccmp}, ccmp & targets, dp, verbose=verbose)
         ss.append(s)
         case_score += s
 
     g_graph = parents.union(hidden_CC)
-    s = PLScore({i: g_graph & undirected_graph[i] for i in g_graph}, g_graph&targets, dp, verbose=verbose)
+    s = pl_score({i: g_graph & undirected_graph[i] for i in g_graph}, g_graph & targets, dp, verbose=verbose)
     ss.append(s)
     case_score += s
 
@@ -90,7 +90,7 @@ def evaluate_iterate_optimized(neighbors, source, targets, dp, parents, hidden_C
     return min_score
 
 
-def PLScore(neighbors, targets, dp={}, verbose=False):
+def pl_score(neighbors, targets, dp={}, verbose=False):
     ind = hash(str(neighbors) + str(targets))
     if len(neighbors) <= 1 or len(targets) <= 0:
         return 0
