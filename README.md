@@ -26,7 +26,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   Import **LazyCount** function from **LazyIter.count** and pass it the adjacency set of the corresponding MEC:
   
   ```python
-  from LazyIter.count import LazyCount
+  from LazyIter.count import lazy_count
   
   neighbors = {
         0: {1, 3, 6},
@@ -39,7 +39,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
         }
 
 
-  print(LazyCount(neighbors))
+  print(lazy_count(neighbors))
   ```
   output:
   ```python
@@ -49,7 +49,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   You can find the number of directed edges in the worst case for a given set of experiment targets using **PLScore** function. To find the best target, you could simply iterate over all valid target sets (based on the experiment budget) and choose the one with maximum score.
   
   ```python
-  from LazyIter.learn import PLScore
+  from LazyIter.learn import pl_score
   
   neighbors = {
         0: {1, 3, 6},
@@ -61,7 +61,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
         6: {0, 3, 4, 5}
         }
   
-  print(PLScore(neighbors, {0, 4}))
+  print(pl_score(neighbors, {0, 4}))
   ```
   output:
   ```python
@@ -73,8 +73,9 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   Active learning is a sub-problem of the Passive learning case where the target set contains only 1 node. Therefore, You can use **PLScore** for this purpose too.
 
 
-## Contributing
+## Contribution
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Future work maybe focused at adding support for other objective functions.
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
