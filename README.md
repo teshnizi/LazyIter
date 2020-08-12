@@ -70,7 +70,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   Explanation: If you intervene on nodes 0 and 4 simultaneously in different trails, you will discover direction of at least 8 edges.
   
   - **Active Learning**
-  Active learning is a sub-problem of the Passive learning case where the target set contains only 1 node. Therefore, You can use **PLScore** for this purpose too.
+  Active learning is a sub-problem of the Passive learning case where the target set contains only 1 node. Therefore, You can use **pl_score** for this purpose too.
 
 
 ## Contribution
