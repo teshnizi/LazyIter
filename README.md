@@ -23,7 +23,8 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
 
 
   - **LazyCount**
-  Import **LazyCount** function from **LazyIter.count** and pass it the adjacency set of the corresponding MEC:
+  
+  Import **lazy_count** function from **LazyIter.count** and pass it the adjacency set of the corresponding MEC:
   
   ```python
   from LazyIter.count import lazy_count
@@ -46,7 +47,8 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
   22
   ```
   - **Passive Learning**
-  You can find the number of directed edges in the worst case for a given set of experiment targets using **PLScore** function. To find the best target, you could simply iterate over all valid target sets (based on the experiment budget) and choose the one with maximum score.
+  
+  You can find the number of directed edges in the worst case for a given set of experiment targets using **pl_score** function. To find the best target, you could simply iterate over all valid target sets (based on the experiment budget) and choose the one with maximum score.
   
   ```python
   from LazyIter.learn import pl_score
