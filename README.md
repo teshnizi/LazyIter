@@ -76,7 +76,7 @@ Implementation of the ICML paper "LazyIter: A Fast Algorithm for Counting Markov
 
 
 ## Contribution
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Future work maybe focused at adding support for other objective functions.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Future work maybe focused on adding other experiment score functions.
 
 
 ## License
