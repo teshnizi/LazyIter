@@ -10,7 +10,7 @@ Implementation of ICML paper "LazyIter: A Fast Algorithm for Counting Markov Equ
   pip install LazyIter-teshnizi
   ```
 
-2. **using the codes directly**
+2. **using the code directly**
   
   You can also copy files inside **LazyIter** folder to your project's folder and import the functions into your code. 
 
